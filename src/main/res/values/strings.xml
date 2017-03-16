@@ -6,4 +6,5 @@
     <string name="login">Login</string>
     <string name="default_section_value">Section</string>
     <string name="search_title">Search</string>
+    <string name="search_hint">Search for any novel</string>
 </resources>

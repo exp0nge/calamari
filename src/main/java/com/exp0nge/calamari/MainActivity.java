@@ -1,10 +1,12 @@
 package com.exp0nge.calamari;
 
-import android.content.Intent;
+import android.app.SearchManager;
+import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
@@ -14,6 +16,7 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,7 +72,6 @@ public class MainActivity extends AppCompatActivity implements UpdatesFragment.O
         tabLayout.setupWithViewPager(mViewPager);
         tabLayout.setSmoothScrollingEnabled(true);
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-
     }
 
 
@@ -77,6 +79,11 @@ public class MainActivity extends AppCompatActivity implements UpdatesFragment.O
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
         return true;
     }
 
