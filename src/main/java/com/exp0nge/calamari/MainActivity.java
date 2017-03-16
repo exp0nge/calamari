@@ -70,15 +70,6 @@ public class MainActivity extends AppCompatActivity implements UpdatesFragment.O
         tabLayout.setSmoothScrollingEnabled(true);
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
     }
 
 
@@ -160,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements UpdatesFragment.O
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position){
                 case 0:
-                    return new UpdatesFragment();
+                    return UpdatesFragment.newInstance();
                 default:
                     return PlaceholderFragment.newInstance(position + 1);
             }

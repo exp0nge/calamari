@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.exp0nge.calamari.dummy.DummyContent;
 import com.exp0nge.calamari.dummy.DummyContent.DummyItem;
@@ -26,7 +27,7 @@ public class UpdatesFragment extends Fragment {
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
-    private int mColumnCount = 1;
+    private static int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
 
     /**
@@ -45,6 +46,10 @@ public class UpdatesFragment extends Fragment {
         return fragment;
     }
 
+    public static UpdatesFragment newInstance(){
+        return newInstance(mColumnCount);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,9 +65,10 @@ public class UpdatesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_updates_list, container, false);
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+        if (view instanceof RecyclerView || view instanceof FrameLayout) {
+            View listView = view.findViewById(R.id.list);
+            Context context = listView.getContext();
+            RecyclerView recyclerView = (RecyclerView) listView;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {

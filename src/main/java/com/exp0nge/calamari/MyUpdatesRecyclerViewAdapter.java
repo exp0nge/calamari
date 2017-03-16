@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.exp0nge.calamari.UpdatesFragment.OnListFragmentInteractionListener;
+import com.exp0nge.calamari.dummy.DummyContent;
 import com.exp0nge.calamari.dummy.DummyContent.DummyItem;
 
 import java.util.List;
@@ -16,10 +17,13 @@ import java.util.List;
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MyUpdatesRecyclerViewAdapter extends RecyclerView.Adapter<MyUpdatesRecyclerViewAdapter.ViewHolder> {
+public class MyUpdatesRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final List<DummyItem> mValues;
     private final OnListFragmentInteractionListener mListener;
+
+    private static final int TYPE_HEADER = 0;
+    private static final int TYPE_ITEM = 1;
 
     public MyUpdatesRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
         mValues = items;
@@ -27,29 +31,50 @@ public class MyUpdatesRecyclerViewAdapter extends RecyclerView.Adapter<MyUpdates
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_updates, parent, false);
-        return new ViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == TYPE_ITEM){
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.fragment_updates_item, parent, false);
+            return new ItemViewHolder(view);
+        } else if (viewType == TYPE_HEADER){
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.fragment_updates_header, parent, false);
+            return new SectionViewHolder(view);
+        }
+
+        throw new RuntimeException("Cannot match viewType " + viewType);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.updateTitleView.setText(mValues.get(position).details);
-        holder.updateChapterView.setText(mValues.get(position).id);
-        holder.updateReleaseGroupView.setText(mValues.get(position).content);
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof ItemViewHolder) {
+            ((ItemViewHolder) holder).mItem = mValues.get(position);
+            ((ItemViewHolder) holder).updateTitleView.setText(mValues.get(position).details);
+            ((ItemViewHolder) holder).updateChapterView.setText(mValues.get(position).id);
+            ((ItemViewHolder) holder).updateReleaseGroupView.setText(mValues.get(position).content);
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
+            ((ItemViewHolder) holder).mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (null != mListener) {
+                        // Notify the active callbacks interface (the activity, if the
+                        // fragment is attached to one) that an item has been selected.
+                        mListener.onListFragmentInteraction(((ItemViewHolder) holder).mItem);
+                    }
                 }
-            }
-        });
+            });
+        } else if (holder instanceof SectionViewHolder){
+            ((SectionViewHolder) holder).sectionHeaderView.setText(DummyContent.DATE_MAP.get(position));
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (DummyContent.DATE_MAP.containsKey(position)){
+            return TYPE_HEADER;
+        }
+
+        return TYPE_ITEM;
     }
 
     @Override
@@ -57,14 +82,15 @@ public class MyUpdatesRecyclerViewAdapter extends RecyclerView.Adapter<MyUpdates
         return mValues.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ItemViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView updateTitleView;
         public final TextView updateChapterView;
         public final TextView updateReleaseGroupView;
+
         public DummyItem mItem;
 
-        public ViewHolder(View view) {
+        public ItemViewHolder(View view) {
             super(view);
             mView = view;
             updateTitleView = (TextView) view.findViewById(R.id.update_title);
@@ -75,6 +101,21 @@ public class MyUpdatesRecyclerViewAdapter extends RecyclerView.Adapter<MyUpdates
         @Override
         public String toString() {
             return super.toString() + " '" + updateChapterView.getText() + "'";
+        }
+    }
+    class SectionViewHolder extends RecyclerView.ViewHolder {
+        public final View mView;
+        public final TextView sectionHeaderView;
+
+        public SectionViewHolder(View view) {
+            super(view);
+            mView = view;
+            sectionHeaderView = (TextView) view.findViewById(R.id.section_header);
+        }
+
+        @Override
+        public String toString() {
+            return super.toString() + " '" + sectionHeaderView.getText() + "'";
         }
     }
 }

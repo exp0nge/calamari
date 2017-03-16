@@ -22,13 +22,18 @@ public class DummyContent {
      * A map of sample (dummy) items, by ID.
      */
     public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
+    public static final Map<Integer, String> DATE_MAP = new HashMap<>();
 
     private static final int COUNT = 25;
 
     static {
         // Add some sample items.
-        for (int i = 1; i <= COUNT; i++) {
-            addItem(createDummyItem(i));
+        for (int i = 0; i <= COUNT; i++) {
+            if (i % 4 == 0){
+                DATE_MAP.put(i, "this is a header for " + Integer.toString(i));
+            } else {
+                addItem(createDummyItem(i));
+            }
         }
     }
 
