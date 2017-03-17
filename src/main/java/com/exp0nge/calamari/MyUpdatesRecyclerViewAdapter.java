@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.exp0nge.calamari.UpdatesFragment.OnListFragmentInteractionListener;
@@ -51,7 +52,6 @@ public class MyUpdatesRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
             ((ItemViewHolder) holder).mItem = mValues.get(position);
             ((ItemViewHolder) holder).updateTitleView.setText(mValues.get(position).details);
             ((ItemViewHolder) holder).updateChapterView.setText(mValues.get(position).id);
-            ((ItemViewHolder) holder).updateReleaseGroupView.setText(mValues.get(position).content);
 
             ((ItemViewHolder) holder).mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -86,7 +86,7 @@ public class MyUpdatesRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
         public final View mView;
         public final TextView updateTitleView;
         public final TextView updateChapterView;
-        public final TextView updateReleaseGroupView;
+        public final ImageView coverImageView;
 
         public DummyItem mItem;
 
@@ -95,7 +95,7 @@ public class MyUpdatesRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
             mView = view;
             updateTitleView = (TextView) view.findViewById(R.id.update_title);
             updateChapterView = (TextView) view.findViewById(R.id.update_chapter);
-            updateReleaseGroupView = (TextView) view.findViewById(R.id.update_group);
+            coverImageView = (ImageView) view.findViewById(R.id.cover_image);
         }
 
         @Override

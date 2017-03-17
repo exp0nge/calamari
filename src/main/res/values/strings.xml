@@ -7,4 +7,5 @@
     <string name="default_section_value">Section</string>
     <string name="search_title">Search</string>
     <string name="search_hint">Search for any novel</string>
+    <string name="cover_photo_description">Cover photo for the novel</string>
 </resources>
