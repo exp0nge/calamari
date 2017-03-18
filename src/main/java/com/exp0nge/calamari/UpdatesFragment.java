@@ -3,6 +3,7 @@ package com.exp0nge.calamari;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,8 +14,6 @@ import android.widget.FrameLayout;
 
 import com.exp0nge.calamari.dummy.DummyContent;
 import com.exp0nge.calamari.dummy.DummyContent.DummyItem;
-
-import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -66,14 +65,21 @@ public class UpdatesFragment extends Fragment {
 
         // Set the adapter
         if (view instanceof RecyclerView || view instanceof FrameLayout) {
-            View listView = view.findViewById(R.id.list);
+            View listView = view.findViewById(R.id.updates_list_fragment);
             Context context = listView.getContext();
             RecyclerView recyclerView = (RecyclerView) listView;
+
+
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
+
+            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                    LinearLayoutManager.VERTICAL);
+            recyclerView.addItemDecoration(dividerItemDecoration);
+
             recyclerView.setAdapter(new MyUpdatesRecyclerViewAdapter(DummyContent.ITEMS, mListener));
         }
         return view;
