@@ -12,7 +12,7 @@
     <string name="reading_list">Reading List</string>
     <string name="browse">Browse</string>
     <string name="filters">Filters</string>
-    <string name="title_activity_novel_detail_scrolling">NovelDetailScrollingActivity</string>
+    <string name="title_activity_novel_detail_scrolling">Novel Detail</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 

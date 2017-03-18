@@ -44,6 +44,8 @@ public class BrowseActivity extends AppCompatActivity implements UpdatesFragment
      */
     private ViewPager mViewPager;
 
+    private TabLayout tabLayout;
+
     private static List<String> PageTitles = Arrays.asList(
             "Updates",
             "Novel Listing",
@@ -60,7 +62,6 @@ public class BrowseActivity extends AppCompatActivity implements UpdatesFragment
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse);
-
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.browse_toolbar);
         setSupportActionBar(toolbar);
@@ -96,17 +97,18 @@ public class BrowseActivity extends AppCompatActivity implements UpdatesFragment
         mDrawerToggle.syncState();
 
 
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
+        // Create the adapter that will return a fragment for each tabs
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.browse_container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout = (TabLayout) findViewById(R.id.browse_tabs);
         tabLayout.setupWithViewPager(mViewPager);
         tabLayout.setSmoothScrollingEnabled(true);
+
+        fixTabMode(getResources().getConfiguration().orientation);
     }
 
     @Override
@@ -119,8 +121,18 @@ public class BrowseActivity extends AppCompatActivity implements UpdatesFragment
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        // Pass any configuration change to the drawer toggls
+        // Pass any configuration change to the drawer toggles
         mDrawerToggle.onConfigurationChanged(newConfig);
+        fixTabMode(newConfig.orientation);
+    }
+
+    public void fixTabMode(final int currentOrientation) {
+        if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+            tabLayout.setTabMode(TabLayout.MODE_FIXED);
+            tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
+        } else {
+            tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        }
     }
 
     @Override
@@ -158,6 +170,7 @@ public class BrowseActivity extends AppCompatActivity implements UpdatesFragment
     @Override
     public void onListFragmentInteraction(DummyContent.DummyItem item) {
         Intent intent = new Intent(this, NovelDetailScrollingActivity.class);
+        intent.putExtra("id", item.id);
         startActivity(intent);
     }
 
