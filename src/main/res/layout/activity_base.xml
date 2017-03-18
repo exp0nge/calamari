@@ -24,22 +24,12 @@
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
         </android.support.v7.widget.Toolbar>
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabGravity="fill"
-            app:tabMode="scrollable" />
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/container"
+    <FrameLayout
+        android:id="@+id/activity_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/container"
-        android:paddingBottom="56dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:layout_height="wrap_content" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -51,6 +41,6 @@
         android:layout_gravity="bottom"
         app:layout_anchorGravity="bottom"
         app:layout_scrollFlags="scroll|enterAlways"
-        app:layout_anchor="@id/container"
+        app:layout_anchor="@id/activity_content"
         app:menu="@menu/bottom_navigation_main" />
 </android.support.design.widget.CoordinatorLayout>
