@@ -10,5 +10,5 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context="com.exp0nge.calamari.NovelCardListFragment"
-    tools:listitem="@layout/fragment_novel_row"
+    tools:listitem="@layout/fragment_novel_card_row"
     android:scrollbars="vertical" />

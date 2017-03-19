@@ -10,6 +10,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,8 +49,9 @@ public class NovelsDetailScrollingNovelDetailFragment extends Fragment implement
 
         View view = getView();
 
-//        Toolbar toolbar = (Toolbar) view.findViewById(R.id.novel_detail_toolbar);
-//        getActivity()setSupportActionBar(toolbar);
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.novel_detail_toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.novel_detail_fab);
         fab.setOnClickListener(new View.OnClickListener() {

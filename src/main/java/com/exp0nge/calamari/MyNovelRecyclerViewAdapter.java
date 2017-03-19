@@ -29,7 +29,7 @@ public class MyNovelRecyclerViewAdapter extends RecyclerView.Adapter<MyNovelRecy
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_novel_row, parent, false);
+                .inflate(R.layout.fragment_novel_card_row, parent, false);
         return new ViewHolder(view);
     }
 
