@@ -3,21 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_browse"
-        android:enabled="true"
+        android:enabled="false"
         android:icon="@drawable/ic_explore"
         android:title="@string/browse"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_reading_list"
-        android:enabled="true"
+        android:enabled="false"
         android:icon="@drawable/ic_library_books"
         android:title="@string/reading_list"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_profile"
-        android:enabled="true"
+        android:enabled="false"
         android:icon="@drawable/ic_shuffle"
         android:title="@string/random"
         app:showAsAction="ifRoom" />

@@ -4,12 +4,11 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.adroitandroid.chipcloud.ChipCloud;
 import com.exp0nge.calamari.dummy.DummyContent;
 
 
@@ -22,10 +21,6 @@ import com.exp0nge.calamari.dummy.DummyContent;
  * create an instance of this fragment.
  */
 public class NovelDetailTabFragment extends Fragment {
-    private RecyclerView genreRecyclerView;
-    private RecyclerView.Adapter genreRecyclerAdapter;
-    private RecyclerView.LayoutManager genreLayoutManager;
-    private int genreColumnCount = 3;
 
     private OnNovelDetailFragmentInteractionListener mListener;
 
@@ -55,12 +50,13 @@ public class NovelDetailTabFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_novel_detail_tab, container, false);
-        genreRecyclerView = (RecyclerView) view.findViewById(R.id.genre_recycler_view);
-        genreRecyclerView.setHasFixedSize(true);
-        genreLayoutManager = new GridLayoutManager(container.getContext(), genreColumnCount);
-        genreRecyclerView.setLayoutManager(genreLayoutManager);
-        genreRecyclerAdapter = new GenreRecyclerAdapter(DummyContent.ITEMS);
-        genreRecyclerView.setAdapter(genreRecyclerAdapter);
+
+        ChipCloud genreChipCloud = (ChipCloud) view.findViewById(R.id.genre_chip_cloud);
+        String[] ids = new String[DummyContent.ITEMS.size()];
+        for (int i = 0; i < DummyContent.ITEMS.size(); i++) {
+            ids[i] = DummyContent.ITEMS.get(i).id;
+        }
+        genreChipCloud.addChips(ids);
 
         return view;
     }

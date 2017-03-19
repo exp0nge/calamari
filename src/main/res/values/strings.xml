@@ -107,4 +107,11 @@
 
     <string name="genres_label">Genres</string>
     <string name="random">Random</string>
+    <string name="novel_sypnosis">Sypnosis</string>
+    <string name="tag_label">Tags</string>
+    <string name="novel_type">Novel Type</string>
+    <string name="language_label">Language</string>
+    <string name="frequency_label">Frequency</string>
+    <string name="author_label">Author</string>
+    <string name="novel_release_status">Status</string>
 </resources>

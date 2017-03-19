@@ -9,7 +9,7 @@
     <LinearLayout
         android:id="@+id/novel_detail_top"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="5dp">
 
@@ -22,15 +22,17 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
                 <RelativeLayout
-                    android:layout_width="140dp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent">
 
                     <ImageView
                         android:id="@+id/novel_detail_image"
-                        android:layout_width="140dp"
+                        android:layout_width="match_parent"
                         android:layout_height="110dp"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
@@ -47,53 +49,67 @@
                         android:rating="4" />
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/novel_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/text_margin"
-                        android:drawableStart="@drawable/ic_import_contacts_accent"
-                        android:maxLines="1"
                         android:drawablePadding="@dimen/drawableIconPadding"
+                        android:drawableStart="@drawable/ic_import_contacts_accent"
                         android:gravity="center"
-                        android:text="Web Novel" />
+                        android:maxLines="1"
+                        android:text="@string/novel_type" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="@dimen/drawableIconPadding"
+                        android:drawableStart="@drawable/ic_language"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="@string/language_label" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_below="@id/novel_type"
-                        android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="@dimen/drawableIconPadding"
+                        android:drawableStart="@drawable/ic_new_releases"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="@string/frequency_label" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:drawableStart="@drawable/ic_tonality_accent"
-                            android:maxLines="1"
-                            android:drawablePadding="@dimen/drawableIconPadding"
-                            android:gravity="center"
-                            android:text="@string/genres_label" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="@dimen/drawableIconPadding"
+                        android:drawableStart="@drawable/ic_person_outline"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="@string/author_label" />
 
-                        <android.support.v7.widget.RecyclerView xmlns:tools="http://schemas.android.com/tools"
-                            android:id="@+id/genre_recycler_view"
-                            android:scrollbars="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            tools:listitem="@layout/genre_item" />
-
-
-                    </LinearLayout>
-                </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="@dimen/drawableIconPadding"
+                        android:drawableStart="@drawable/ic_lightbulb_outline"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="@string/novel_release_status" />
+                </LinearLayout>
 
             </LinearLayout>
         </android.support.v7.widget.CardView>
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/novel_summary_layout"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_below="@id/novel_detail_top"
@@ -106,19 +122,130 @@
             app:cardCornerRadius="@dimen/cardview_default_radius"
             app:cardUseCompatPadding="true">
 
-            <ScrollView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/novel_detail_summary"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/card_heading"
                     android:layout_margin="@dimen/text_margin"
-                    android:text="@string/large_text" />
+                    android:background="@drawable/bottom_border"
+                    android:gravity="center_vertical"
+                    android:text="@string/novel_sypnosis" />
 
-            </ScrollView>
+                <ScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
+                    <TextView
+                        android:id="@+id/novel_detail_summary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/text_margin"
+                        android:text="@string/large_text" />
+
+                </ScrollView>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/genre_cloud_layout"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@id/novel_summary_layout"
+        android:padding="5dp">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/genre_cloud_card"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="@dimen/cardview_default_elevation"
+            android:padding="5dp"
+            app:cardCornerRadius="@dimen/cardview_default_radius"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/card_heading"
+                    android:layout_margin="@dimen/text_margin"
+                    android:background="@drawable/bottom_border"
+                    android:gravity="center_vertical"
+                    android:text="@string/genres_label" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.adroitandroid.chipcloud.ChipCloud xmlns:chipcloud="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/genre_chip_cloud"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/text_margin"
+                        chipcloud:allCaps="false"
+                        chipcloud:gravity="staggered"
+                        chipcloud:selectMode="none" />
+
+                </ScrollView>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tag_cloud"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@id/genre_cloud_layout"
+        android:padding="5dp">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/tag_cloud_card"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="@dimen/cardview_default_elevation"
+            android:padding="5dp"
+            app:cardCornerRadius="@dimen/cardview_default_radius"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/card_heading"
+                    android:layout_margin="@dimen/text_margin"
+                    android:background="@drawable/bottom_border"
+                    android:gravity="center_vertical"
+                    android:text="@string/tag_label" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.adroitandroid.chipcloud.ChipCloud xmlns:chipcloud="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/tag_chip_cloud"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/text_margin"
+                        chipcloud:allCaps="false"
+                        chipcloud:gravity="staggered"
+                        chipcloud:selectMode="none" />
+
+                </ScrollView>
+            </LinearLayout>
         </android.support.v7.widget.CardView>
 
     </LinearLayout>
