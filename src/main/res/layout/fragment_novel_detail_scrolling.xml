@@ -5,9 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:colorBackground"
-    tools:context="com.exp0nge.calamari.NovelsDetailScrollingNovelDetailFragment">
+    tools:context="com.exp0nge.calamari.NovelScrollingFragment">
 
     <android.support.design.widget.AppBarLayout
+        android:background="?colorAccent"
         android:id="@+id/novel_detail_appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,6 +21,7 @@
             app:layout_collapseMode="pin"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
+
 
         <android.support.design.widget.TabLayout
             android:id="@+id/detail_tabs"

@@ -18,10 +18,10 @@ import com.exp0nge.calamari.dummy.DummyContent;
  * Activities that contain this fragment must implement the
  * {@link OnNovelDetailFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link NovelDetailFragment#newInstance} factory method to
+ * Use the {@link NovelDetailTabFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NovelDetailFragment extends Fragment {
+public class NovelDetailTabFragment extends Fragment {
     private RecyclerView genreRecyclerView;
     private RecyclerView.Adapter genreRecyclerAdapter;
     private RecyclerView.LayoutManager genreLayoutManager;
@@ -29,7 +29,7 @@ public class NovelDetailFragment extends Fragment {
 
     private OnNovelDetailFragmentInteractionListener mListener;
 
-    public NovelDetailFragment() {
+    public NovelDetailTabFragment() {
         // Required empty public constructor
     }
 
@@ -37,11 +37,11 @@ public class NovelDetailFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment NovelDetailFragment.
+     * @return A new instance of fragment NovelDetailTabFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static NovelDetailFragment newInstance() {
-        return new NovelDetailFragment();
+    public static NovelDetailTabFragment newInstance() {
+        return new NovelDetailTabFragment();
     }
 
 
@@ -54,7 +54,7 @@ public class NovelDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_novel_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_novel_detail_tab, container, false);
         genreRecyclerView = (RecyclerView) view.findViewById(R.id.genre_recycler_view);
         genreRecyclerView.setHasFixedSize(true);
         genreLayoutManager = new GridLayoutManager(container.getContext(), genreColumnCount);

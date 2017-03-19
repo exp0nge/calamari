@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="@dimen/appbar_padding_top"
-    tools:context="com.exp0nge.calamari.NovelDetailFragment">
+    tools:context="com.exp0nge.calamari.NovelDetailTabFragment">
 
     <LinearLayout
         android:id="@+id/novel_detail_top"

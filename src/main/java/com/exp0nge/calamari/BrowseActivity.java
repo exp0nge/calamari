@@ -29,7 +29,7 @@ import java.util.List;
 
 public class BrowseActivity extends AppCompatActivity implements
         LatestUpdatesListFragment.OnListFragmentInteractionListener,
-        NovelDetailFragment.OnNovelDetailFragmentInteractionListener {
+        NovelDetailTabFragment.OnNovelDetailFragmentInteractionListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -125,7 +125,8 @@ public class BrowseActivity extends AppCompatActivity implements
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
-        mDrawerToggle.syncState();
+        if (mDrawerToggle != null)
+            mDrawerToggle.syncState();
     }
 
     @Override
@@ -177,7 +178,7 @@ public class BrowseActivity extends AppCompatActivity implements
     @Override
     public void onListFragmentInteraction(DummyContent.DummyItem item) {
         if (findViewById(R.id.main_browse_content) != null) {
-            NovelsDetailScrollingNovelDetailFragment detailFragment = new NovelsDetailScrollingNovelDetailFragment();
+            NovelScrollingFragment detailFragment = new NovelScrollingFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.main_browse_content, detailFragment);
             transaction.addToBackStack(null);

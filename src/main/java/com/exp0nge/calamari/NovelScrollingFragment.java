@@ -13,20 +13,21 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class NovelsDetailScrollingNovelDetailFragment extends Fragment implements
-        NovelDetailFragment.OnNovelDetailFragmentInteractionListener {
+public class NovelScrollingFragment extends Fragment implements
+        NovelDetailTabFragment.OnNovelDetailFragmentInteractionListener {
     private static List<String> PageTitles = Arrays.asList(
             "Details",
             "Chapters",
             "Reviews");
 
-    private NovelsDetailScrollingNovelDetailFragment.SectionsPagerAdapter mSectionsPagerAdapter;
+    private NovelScrollingFragment.SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
 
     @Override
@@ -34,13 +35,22 @@ public class NovelsDetailScrollingNovelDetailFragment extends Fragment implement
         super.onCreate(savedInstanceState);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
+            return true;
+        }
+
+        return false;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_novel_detail_scrolling, container, false);
-
-
-        return view;
+        return inflater.inflate(R.layout.fragment_novel_detail_scrolling, container, false);
     }
 
     @Override
@@ -51,7 +61,9 @@ public class NovelsDetailScrollingNovelDetailFragment extends Fragment implement
 
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.novel_detail_toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitle("A Really Long Novel Title Would Show Up Like This");
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.novel_detail_fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -79,8 +91,8 @@ public class NovelsDetailScrollingNovelDetailFragment extends Fragment implement
 
     }
 
-    public static NovelsDetailScrollingNovelDetailFragment newInstance() {
-        return new NovelsDetailScrollingNovelDetailFragment();
+    public static NovelScrollingFragment newInstance() {
+        return new NovelScrollingFragment();
     }
 
     public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
@@ -95,7 +107,7 @@ public class NovelsDetailScrollingNovelDetailFragment extends Fragment implement
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0:
-                    return NovelDetailFragment.newInstance();
+                    return NovelDetailTabFragment.newInstance();
                 default:
                     return NovelCardListFragment.newInstance();
             }
