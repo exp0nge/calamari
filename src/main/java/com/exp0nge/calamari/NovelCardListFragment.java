@@ -1,6 +1,7 @@
 package com.exp0nge.calamari;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -26,6 +27,7 @@ public class NovelCardListFragment extends Fragment {
     // TODO: Customize parameters
     private static int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+    private int orientation;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -47,6 +49,7 @@ public class NovelCardListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        orientation = getResources().getConfiguration().orientation;
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
@@ -62,10 +65,10 @@ public class NovelCardListFragment extends Fragment {
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
+            if (mColumnCount <= 1 && orientation == Configuration.ORIENTATION_PORTRAIT) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+                recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
             }
             recyclerView.setAdapter(new MyNovelRecyclerViewAdapter(DummyContent.ITEMS, mListener));
         }

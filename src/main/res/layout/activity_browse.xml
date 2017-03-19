@@ -57,14 +57,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:background="?colorBackgroundFloating"
-                android:theme="@style/AppTheme"
+                app:itemBackground="?colorPrimary"
+                app:itemIconTint="?colorAccent"
+                app:itemTextColor="?colorAccent"
                 app:layout_anchor="@id/browse_container"
                 app:layout_anchorGravity="bottom"
                 app:layout_behavior="com.exp0nge.calamari.HidingBottomNavigationBehavior"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:menu="@menu/bottom_navigation_main" />
-
         </android.support.design.widget.CoordinatorLayout>
 
     </FrameLayout>

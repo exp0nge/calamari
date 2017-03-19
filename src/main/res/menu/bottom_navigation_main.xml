@@ -9,13 +9,6 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/action_profile"
-        android:enabled="true"
-        android:icon="@drawable/ic_person_outline"
-        android:title="@string/profile"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/action_reading_list"
         android:enabled="true"
         android:icon="@drawable/ic_library_books"
@@ -23,11 +16,13 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/action_filtering"
+        android:id="@+id/action_profile"
         android:enabled="true"
-        android:icon="@drawable/ic_filter_list"
-        android:title="@string/filters"
+        android:icon="@drawable/ic_shuffle"
+        android:title="@string/random"
         app:showAsAction="ifRoom" />
+
+
 
 
 </menu>
