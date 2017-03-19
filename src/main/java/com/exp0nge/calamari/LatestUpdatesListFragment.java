@@ -21,7 +21,7 @@ import com.exp0nge.calamari.dummy.DummyContent.DummyItem;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class LatestUpdatesFragment extends Fragment {
+public class LatestUpdatesListFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -33,19 +33,19 @@ public class LatestUpdatesFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public LatestUpdatesFragment() {
+    public LatestUpdatesListFragment() {
     }
 
     @SuppressWarnings("unused")
-    public static LatestUpdatesFragment newInstance(int columnCount) {
-        LatestUpdatesFragment fragment = new LatestUpdatesFragment();
+    public static LatestUpdatesListFragment newInstance(int columnCount) {
+        LatestUpdatesListFragment fragment = new LatestUpdatesListFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public static LatestUpdatesFragment newInstance() {
+    public static LatestUpdatesListFragment newInstance() {
         return newInstance(mColumnCount);
     }
 

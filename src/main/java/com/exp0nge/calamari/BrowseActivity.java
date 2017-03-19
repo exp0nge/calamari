@@ -2,13 +2,14 @@ package com.exp0nge.calamari;
 
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -27,7 +28,9 @@ import com.exp0nge.calamari.dummy.DummyContent;
 import java.util.Arrays;
 import java.util.List;
 
-public class BrowseActivity extends AppCompatActivity implements LatestUpdatesFragment.OnListFragmentInteractionListener {
+public class BrowseActivity extends AppCompatActivity implements
+        LatestUpdatesListFragment.OnListFragmentInteractionListener,
+        NovelDetailFragment.OnNovelDetailFragmentInteractionListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -63,52 +66,60 @@ public class BrowseActivity extends AppCompatActivity implements LatestUpdatesFr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.browse_toolbar);
-        setSupportActionBar(toolbar);
+        if (findViewById(R.id.main_browse_content) != null) {
+            if (savedInstanceState != null) {
+                return;
+            }
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-                R.string.drawer_open, R.string.drawer_close) {
+            Toolbar toolbar = (Toolbar) findViewById(R.id.browse_toolbar);
+            setSupportActionBar(toolbar);
 
-            /**
-             * Called when a drawer has settled in a completely closed state.
-             */
-            public void onDrawerClosed(View view) {
-                super.onDrawerClosed(view);
+            mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+            mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+                    R.string.drawer_open, R.string.drawer_close) {
+
+                /**
+                 * Called when a drawer has settled in a completely closed state.
+                 */
+                public void onDrawerClosed(View view) {
+                    super.onDrawerClosed(view);
 //                getActionBar().setTitle(mTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
+                    invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                }
 
-            /**
-             * Called when a drawer has settled in a completely open state.
-             */
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
+                /**
+                 * Called when a drawer has settled in a completely open state.
+                 */
+                public void onDrawerOpened(View drawerView) {
+                    super.onDrawerOpened(drawerView);
 //                getActionBar().setTitle(mDrawerTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                    invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                }
+            };
+
+            // Set the drawer toggle as the DrawerListener
+            mDrawerLayout.addDrawerListener(mDrawerToggle);
+
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setHomeButtonEnabled(true);
             }
-        };
-
-        // Set the drawer toggle as the DrawerListener
-        mDrawerLayout.addDrawerListener(mDrawerToggle);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        mDrawerToggle.syncState();
+            mDrawerToggle.syncState();
 
 
-        // Create the adapter that will return a fragment for each tabs
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+            // Create the adapter that will return a fragment for each tabs
+            mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.browse_container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+            // Set up the ViewPager with the sections adapter.
+            mViewPager = (ViewPager) findViewById(R.id.browse_container);
+            mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        tabLayout = (TabLayout) findViewById(R.id.browse_tabs);
-        tabLayout.setupWithViewPager(mViewPager);
-        tabLayout.setSmoothScrollingEnabled(true);
+            tabLayout = (TabLayout) findViewById(R.id.browse_tabs);
+            tabLayout.setupWithViewPager(mViewPager);
+            tabLayout.setSmoothScrollingEnabled(true);
 
-        fixTabMode(getResources().getConfiguration().orientation);
+            fixTabMode(getResources().getConfiguration().orientation);
+        }
     }
 
     @Override
@@ -169,9 +180,18 @@ public class BrowseActivity extends AppCompatActivity implements LatestUpdatesFr
 
     @Override
     public void onListFragmentInteraction(DummyContent.DummyItem item) {
-        Intent intent = new Intent(this, NovelsDetailScrollingActivity.class);
-        intent.putExtra("id", item.id);
-        startActivity(intent);
+        if (findViewById(R.id.main_browse_content) != null) {
+            NovelsDetailScrollingNovelDetailFragment detailFragment = new NovelsDetailScrollingNovelDetailFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.main_browse_content, detailFragment);
+            transaction.addToBackStack(null);
+
+            transaction.commit();
+        }
+    }
+
+    @Override
+    public void onNovelDetailFragmentInteraction(Uri uri) {
     }
 
     /**
@@ -190,9 +210,9 @@ public class BrowseActivity extends AppCompatActivity implements LatestUpdatesFr
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0:
-                    return LatestUpdatesFragment.newInstance();
+                    return LatestUpdatesListFragment.newInstance();
                 default:
-                    return NovelFragment.newInstance();
+                    return NovelCardListFragment.newInstance();
             }
         }
 

@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.exp0nge.calamari.NovelFragment.OnListFragmentInteractionListener;
+import com.exp0nge.calamari.NovelCardListFragment.OnListFragmentInteractionListener;
 import com.exp0nge.calamari.dummy.DummyContent.DummyItem;
 
 import java.util.List;

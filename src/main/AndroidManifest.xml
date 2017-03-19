@@ -25,7 +25,7 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".NovelsDetailScrollingActivity"
+            android:name=".NovelsDetailScrollingNovelDetailFragment"
             android:label="@string/title_activity_novel_detail_scrolling"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

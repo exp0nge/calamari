@@ -2,42 +2,55 @@ package com.exp0nge.calamari;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class NovelsDetailScrollingActivity extends AppCompatActivity implements
-        NovelDetailFragment.OnFragmentInteractionListener {
+public class NovelsDetailScrollingNovelDetailFragment extends Fragment implements
+        NovelDetailFragment.OnNovelDetailFragmentInteractionListener {
     private static List<String> PageTitles = Arrays.asList(
             "Details",
             "Chapters",
             "Reviews");
 
-    private NovelsDetailScrollingActivity.SectionsPagerAdapter mSectionsPagerAdapter;
+    private NovelsDetailScrollingNovelDetailFragment.SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_novel_detail_scrolling);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.novel_detail_toolbar);
-        setSupportActionBar(toolbar);
+    }
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Novel numero " + getIntent().getStringExtra("id"));
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_novel_detail_scrolling, container, false);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        View view = getView();
+
+//        Toolbar toolbar = (Toolbar) view.findViewById(R.id.novel_detail_toolbar);
+//        getActivity()setSupportActionBar(toolbar);
+
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.novel_detail_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,33 +60,27 @@ public class NovelsDetailScrollingActivity extends AppCompatActivity implements
         });
 
         // Create the adapter that will return a fragment for each tabs
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getActivity().getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.novel_detail_container);
+        mViewPager = (ViewPager) view.findViewById(R.id.novel_detail_container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.detail_tabs);
+        TabLayout tabLayout = (TabLayout) view.findViewById(R.id.detail_tabs);
         tabLayout.setupWithViewPager(mViewPager);
         tabLayout.setSmoothScrollingEnabled(true);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void onNovelDetailFragmentInteraction(Uri uri) {
 
     }
 
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    public static NovelsDetailScrollingNovelDetailFragment newInstance() {
+        return new NovelsDetailScrollingNovelDetailFragment();
+    }
+
+    public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -87,7 +94,7 @@ public class NovelsDetailScrollingActivity extends AppCompatActivity implements
                 case 0:
                     return NovelDetailFragment.newInstance();
                 default:
-                    return NovelFragment.newInstance();
+                    return NovelCardListFragment.newInstance();
             }
         }
 

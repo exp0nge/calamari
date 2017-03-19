@@ -16,7 +16,7 @@ import com.exp0nge.calamari.dummy.DummyContent;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link NovelDetailFragment.OnFragmentInteractionListener} interface
+ * {@link OnNovelDetailFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link NovelDetailFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -27,7 +27,7 @@ public class NovelDetailFragment extends Fragment {
     private RecyclerView.LayoutManager genreLayoutManager;
     private int genreColumnCount = 3;
 
-    private OnFragmentInteractionListener mListener;
+    private OnNovelDetailFragmentInteractionListener mListener;
 
     public NovelDetailFragment() {
         // Required empty public constructor
@@ -68,18 +68,18 @@ public class NovelDetailFragment extends Fragment {
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.onNovelDetailFragmentInteraction(uri);
         }
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof OnNovelDetailFragmentInteractionListener) {
+            mListener = (OnNovelDetailFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement OnNovelDetailFragmentInteractionListener");
         }
     }
 
@@ -99,9 +99,9 @@ public class NovelDetailFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
+    public interface OnNovelDetailFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onNovelDetailFragmentInteraction(Uri uri);
     }
 
 }

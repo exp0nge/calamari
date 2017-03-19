@@ -19,7 +19,7 @@ import com.exp0nge.calamari.dummy.DummyContent.DummyItem;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class NovelFragment extends Fragment {
+public class NovelCardListFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -31,13 +31,13 @@ public class NovelFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public NovelFragment() {
+    public NovelCardListFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static NovelFragment newInstance(int columnCount) {
-        NovelFragment fragment = new NovelFragment();
+    public static NovelCardListFragment newInstance(int columnCount) {
+        NovelCardListFragment fragment = new NovelCardListFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
