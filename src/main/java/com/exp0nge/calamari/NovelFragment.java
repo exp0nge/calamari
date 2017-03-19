@@ -81,7 +81,7 @@ public class NovelFragment extends Fragment {
         } else {
             //TODO: Implement
 //            throw new RuntimeException(context.toString()
-//                    + " must implement OnListFragmentInteractionListener");
+//                    + " must implement OnGenreListFragmentInteractionListener");
         }
     }
 

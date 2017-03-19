@@ -21,7 +21,7 @@ import com.exp0nge.calamari.dummy.DummyContent.DummyItem;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class UpdatesFragment extends Fragment {
+public class LatestUpdatesFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -33,19 +33,19 @@ public class UpdatesFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public UpdatesFragment() {
+    public LatestUpdatesFragment() {
     }
 
     @SuppressWarnings("unused")
-    public static UpdatesFragment newInstance(int columnCount ) {
-        UpdatesFragment fragment = new UpdatesFragment();
+    public static LatestUpdatesFragment newInstance(int columnCount) {
+        LatestUpdatesFragment fragment = new LatestUpdatesFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public static UpdatesFragment newInstance(){
+    public static LatestUpdatesFragment newInstance() {
         return newInstance(mColumnCount);
     }
 
@@ -93,7 +93,7 @@ public class UpdatesFragment extends Fragment {
             mListener = (OnListFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
+                    + " must implement OnGenreListFragmentInteractionListener");
         }
     }
 

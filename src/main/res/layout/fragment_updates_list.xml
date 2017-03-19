@@ -12,6 +12,6 @@
     android:divider="?colorPrimaryDark"
     android:dividerHeight="4dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context="com.exp0nge.calamari.UpdatesFragment"
+    tools:context="com.exp0nge.calamari.LatestUpdatesFragment"
     tools:listitem="@layout/fragment_updates_item" />
 

@@ -27,7 +27,7 @@ import com.exp0nge.calamari.dummy.DummyContent;
 import java.util.Arrays;
 import java.util.List;
 
-public class BrowseActivity extends AppCompatActivity implements UpdatesFragment.OnListFragmentInteractionListener {
+public class BrowseActivity extends AppCompatActivity implements LatestUpdatesFragment.OnListFragmentInteractionListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -169,7 +169,7 @@ public class BrowseActivity extends AppCompatActivity implements UpdatesFragment
 
     @Override
     public void onListFragmentInteraction(DummyContent.DummyItem item) {
-        Intent intent = new Intent(this, NovelDetailScrollingActivity.class);
+        Intent intent = new Intent(this, NovelsDetailScrollingActivity.class);
         intent.putExtra("id", item.id);
         startActivity(intent);
     }
@@ -190,7 +190,7 @@ public class BrowseActivity extends AppCompatActivity implements UpdatesFragment
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0:
-                    return UpdatesFragment.newInstance();
+                    return LatestUpdatesFragment.newInstance();
                 default:
                     return NovelFragment.newInstance();
             }

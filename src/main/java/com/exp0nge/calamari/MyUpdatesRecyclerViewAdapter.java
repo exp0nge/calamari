@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.exp0nge.calamari.UpdatesFragment.OnListFragmentInteractionListener;
+import com.exp0nge.calamari.LatestUpdatesFragment.OnListFragmentInteractionListener;
 import com.exp0nge.calamari.dummy.DummyContent;
 import com.exp0nge.calamari.dummy.DummyContent.DummyItem;
 
