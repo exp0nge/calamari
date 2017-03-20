@@ -1,6 +1,5 @@
 package com.exp0nge.calamari;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -15,6 +14,9 @@ import com.dexafree.materialList.card.action.TextViewAction;
 import com.dexafree.materialList.view.MaterialListView;
 import com.exp0nge.calamari.dummy.DummyContent;
 import com.exp0nge.calamari.dummy.DummyContent.DummyItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -61,12 +63,12 @@ public class NovelCardListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_novel_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_novel_material_card_list, container, false);
 
         MaterialListView materialListView = (MaterialListView) view.findViewById(R.id.material_listview);
-
+        List<Card> cards = new ArrayList<>();
         for (int i = 0; i < DummyContent.ITEMS.size(); i++) {
-            Card card = new Card.Builder(getContext())
+            cards.add(new Card.Builder(getContext())
                     .withProvider(new CardProvider<>())
                     .setLayout(R.layout.material_basic_image_buttons_card_layout)
                     .setTitle(DummyContent.ITEMS.get(i).id)
@@ -94,36 +96,14 @@ public class NovelCardListFragment extends Fragment {
                                 }
                             }))
                     .endConfig()
-                    .build();
-            materialListView.getAdapter().add(card);
+                    .build());
         }
+        materialListView.getAdapter().addAll(cards);
 
-//        // Set the adapter
-//        if (view instanceof RecyclerView) {
-//            Context context = view.getContext();
-//            RecyclerView recyclerView = (RecyclerView) view;
-//            if (mColumnCount <= 1 && orientation == Configuration.ORIENTATION_PORTRAIT) {
-//                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-//            } else {
-//                recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
-//            }
-//            recyclerView.setAdapter(new MyNovelRecyclerViewAdapter(DummyContent.ITEMS, mListener));
-//        }
+
         return view;
     }
 
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
-        } else {
-            //TODO: Implement
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnGenreListFragmentInteractionListener");
-        }
-    }
 
     @Override
     public void onDetach() {
