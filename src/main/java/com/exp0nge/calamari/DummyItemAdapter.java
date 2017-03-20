@@ -21,11 +21,11 @@ public class DummyItemAdapter extends ArrayAdapter<DummyContent.DummyItem> {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(int position, @Nullable View convertView, @NonNull final ViewGroup parent) {
         DummyContent.DummyItem item = getItem(position);
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.fragment_updates_item,
+                    R.layout.fragment_list_item,
                     parent,
                     false
             );
@@ -34,6 +34,20 @@ public class DummyItemAdapter extends ArrayAdapter<DummyContent.DummyItem> {
         TextView updateTitleView = (TextView) convertView.findViewById(R.id.update_title);
         TextView updateChapterView = (TextView) convertView.findViewById(R.id.update_chapter);
         ImageView coverImageView = (ImageView) convertView.findViewById(R.id.cover_image);
+
+        updateChapterView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((BrowseActivity) parent.getContext()).startNovelScrollFragment();
+            }
+        });
+
+        updateTitleView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((BrowseActivity) parent.getContext()).startNovelScrollFragment();
+            }
+        });
 
         updateTitleView.setText(item.details);
         updateChapterView.setText(item.id);

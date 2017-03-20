@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="4"
         android:layout_margin="@dimen/text_margin"
+        android:textColor="?android:textColorLink"
         android:textAppearance="?attr/textAppearanceListItem" />
 
     <TextView
@@ -30,5 +31,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="3"
         android:layout_margin="@dimen/text_margin"
+        android:textColor="?android:textColorLink"
         android:textAppearance="?attr/textAppearanceListItem" />
 </LinearLayout>

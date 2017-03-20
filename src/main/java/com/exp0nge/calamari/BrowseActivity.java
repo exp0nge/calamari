@@ -183,13 +183,17 @@ public class BrowseActivity extends AppCompatActivity implements
     @Override
     public void onListFragmentInteraction(DummyContent.DummyItem item) {
         if (findViewById(R.id.main_browse_content) != null) {
-            NovelScrollingFragment detailFragment = new NovelScrollingFragment();
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.main_browse_content, detailFragment);
-            transaction.addToBackStack(null);
-
-            transaction.commit();
+            startNovelScrollFragment();
         }
+    }
+
+    public void startNovelScrollFragment() {
+        NovelScrollingFragment detailFragment = new NovelScrollingFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.main_browse_content, detailFragment);
+        transaction.addToBackStack(null);
+
+        transaction.commit();
     }
 
     @Override
