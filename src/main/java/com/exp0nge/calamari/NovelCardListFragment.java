@@ -1,16 +1,18 @@
 package com.exp0nge.calamari;
 
 import android.content.Context;
-import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dexafree.materialList.card.Card;
+import com.dexafree.materialList.card.CardProvider;
+import com.dexafree.materialList.card.OnActionClickListener;
+import com.dexafree.materialList.card.action.TextViewAction;
+import com.dexafree.materialList.view.MaterialListView;
 import com.exp0nge.calamari.dummy.DummyContent;
 import com.exp0nge.calamari.dummy.DummyContent.DummyItem;
 
@@ -61,17 +63,52 @@ public class NovelCardListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_novel_list, container, false);
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1 && orientation == Configuration.ORIENTATION_PORTRAIT) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
-            }
-            recyclerView.setAdapter(new MyNovelRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+        MaterialListView materialListView = (MaterialListView) view.findViewById(R.id.material_listview);
+
+        for (int i = 0; i < DummyContent.ITEMS.size(); i++) {
+            Card card = new Card.Builder(getContext())
+                    .withProvider(new CardProvider<>())
+                    .setLayout(R.layout.material_basic_image_buttons_card_layout)
+                    .setTitle(DummyContent.ITEMS.get(i).id)
+                    .setDescription(DummyContent.ITEMS.get(i).details)
+                    .setDrawable(R.mipmap.no_cover)
+                    .addAction(R.id.left_text_button, new TextViewAction(getContext())
+                            .setText("left")
+                            .setTextResourceColor(R.color.black_button)
+                            .setListener(new OnActionClickListener() {
+                                @Override
+                                public void onActionClicked(View view, Card card) {
+                                    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                                            .setAction("Action", null).show();
+                                }
+                            }))
+                    .addAction(R.id.right_text_button, new TextViewAction(getContext())
+                            .setText("right")
+                            .setTextResourceColor(R.color.orange_button)
+                            .setListener(new OnActionClickListener() {
+                                @Override
+                                public void onActionClicked(View view, Card card) {
+                                    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                                            .setAction("Action", null).show();
+                                    card.dismiss();
+                                }
+                            }))
+                    .endConfig()
+                    .build();
+            materialListView.getAdapter().add(card);
         }
+
+//        // Set the adapter
+//        if (view instanceof RecyclerView) {
+//            Context context = view.getContext();
+//            RecyclerView recyclerView = (RecyclerView) view;
+//            if (mColumnCount <= 1 && orientation == Configuration.ORIENTATION_PORTRAIT) {
+//                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+//            } else {
+//                recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
+//            }
+//            recyclerView.setAdapter(new MyNovelRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+//        }
         return view;
     }
 

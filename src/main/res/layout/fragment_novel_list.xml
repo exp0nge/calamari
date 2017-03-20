@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/updates_list_fragment"
-    android:name="com.exp0nge.calamari.NovelFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    app:layoutManager="LinearLayoutManager"
-    tools:context="com.exp0nge.calamari.NovelCardListFragment"
-    tools:listitem="@layout/fragment_novel_card_row"
-    android:scrollbars="vertical" />
+    tools:context="com.exp0nge.calamari.NovelCardListFragment">
+
+    <com.dexafree.materialList.view.MaterialListView
+        android:id="@+id/material_listview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+
+</RelativeLayout>
