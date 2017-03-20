@@ -3,17 +3,19 @@ package com.exp0nge.calamari;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
+import com.dexafree.materialList.card.Card;
+import com.dexafree.materialList.card.provider.ListCardProvider;
+import com.dexafree.materialList.view.MaterialListView;
 import com.exp0nge.calamari.dummy.DummyContent;
 import com.exp0nge.calamari.dummy.DummyContent.DummyItem;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -21,7 +23,7 @@ import com.exp0nge.calamari.dummy.DummyContent.DummyItem;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class LatestUpdatesListFragment extends Fragment {
+public class NovelListFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -33,19 +35,19 @@ public class LatestUpdatesListFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public LatestUpdatesListFragment() {
+    public NovelListFragment() {
     }
 
     @SuppressWarnings("unused")
-    public static LatestUpdatesListFragment newInstance(int columnCount) {
-        LatestUpdatesListFragment fragment = new LatestUpdatesListFragment();
+    public static NovelListFragment newInstance(int columnCount) {
+        NovelListFragment fragment = new NovelListFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public static LatestUpdatesListFragment newInstance() {
+    public static NovelListFragment newInstance() {
         return newInstance(mColumnCount);
     }
 
@@ -61,30 +63,29 @@ public class LatestUpdatesListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_updates_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_novel_list, container, false);
 
-        // Set the adapter
-        if (view instanceof RecyclerView || view instanceof FrameLayout) {
-            View listView = view.findViewById(R.id.updates_list_fragment);
-            Context context = listView.getContext();
-            RecyclerView recyclerView = (RecyclerView) listView;
+        ArrayList<DummyItem> items = new ArrayList<>(DummyContent.ITEMS);
+        DummyItemAdapter adapter = new DummyItemAdapter(getContext(), items);
+        MaterialListView materialListView = (MaterialListView) view.findViewById(R.id.updates_list_fragment);
 
-
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-
-            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
-                    LinearLayoutManager.VERTICAL);
-            recyclerView.addItemDecoration(dividerItemDecoration);
-
-            recyclerView.setAdapter(new MyUpdatesRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+        List<Card> cards = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            cards.add(new Card.Builder(getContext())
+                    .setTag("LIST_CARD")
+                    .setDismissible()
+                    .withProvider(new ListCardProvider())
+                    .setLayout(R.layout.material_list_card_layout)
+                    .setTitle(Calendar.getInstance().getTime().toString())
+                    .setAdapter(adapter)
+                    .endConfig()
+                    .build());
         }
+
+        materialListView.getAdapter().addAll(cards);
+
         return view;
     }
-
 
     @Override
     public void onAttach(Context context) {

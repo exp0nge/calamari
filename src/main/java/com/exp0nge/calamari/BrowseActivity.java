@@ -29,7 +29,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class BrowseActivity extends AppCompatActivity implements
-        LatestUpdatesListFragment.OnListFragmentInteractionListener,
+        NovelListFragment.OnListFragmentInteractionListener,
         NovelDetailTabFragment.OnNovelDetailFragmentInteractionListener {
 
     /**
@@ -212,7 +212,7 @@ public class BrowseActivity extends AppCompatActivity implements
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0:
-                    return LatestUpdatesListFragment.newInstance();
+                    return NovelListFragment.newInstance();
                 default:
                     return NovelCardListFragment.newInstance();
             }
