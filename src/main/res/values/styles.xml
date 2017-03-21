@@ -16,8 +16,13 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="Light.Orange" parent="Theme.AppCompat.Light.NoActionBar" >
+    <style name="Light.Orange" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorAccent">#FF5722</item>
     </style>
 
+    <style name="StartEndTextMargins">
+        <item name="android:layout_marginStart">@dimen/text_margin</item>
+        <item name="android:layout_marginEnd">@dimen/text_margin</item>
+
+    </style>
 </resources>

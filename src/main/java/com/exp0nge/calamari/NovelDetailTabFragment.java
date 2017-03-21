@@ -52,11 +52,14 @@ public class NovelDetailTabFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_novel_detail_tab, container, false);
 
         ChipCloud genreChipCloud = (ChipCloud) view.findViewById(R.id.genre_chip_cloud);
+        ChipCloud tagCloud = (ChipCloud) view.findViewById(R.id.tag_chip_cloud);
+
         String[] ids = new String[DummyContent.ITEMS.size()];
         for (int i = 0; i < DummyContent.ITEMS.size(); i++) {
             ids[i] = DummyContent.ITEMS.get(i).id;
         }
         genreChipCloud.addChips(ids);
+        tagCloud.addChips(ids);
 
         return view;
     }

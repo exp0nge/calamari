@@ -114,4 +114,6 @@
     <string name="frequency_label">Frequency</string>
     <string name="author_label">Author</string>
     <string name="novel_release_status">Status</string>
+    <string name="show_more">Show more</string>
+    <string name="show_less">Show less</string>
 </resources>
