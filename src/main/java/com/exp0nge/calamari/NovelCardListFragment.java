@@ -3,6 +3,7 @@ package com.exp0nge.calamari;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +27,7 @@ import java.util.List;
  */
 public class NovelCardListFragment extends Fragment {
 
-    private static final String ARG_COLUMN_COUNT = "column-count";
-    private static int mColumnCount = 1;
+    private DrawerLayout filterDrawerLayout;
     private OnListFragmentInteractionListener mListener;
     private int orientation;
 
@@ -40,22 +40,14 @@ public class NovelCardListFragment extends Fragment {
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static NovelCardListFragment newInstance(int columnCount) {
-        NovelCardListFragment fragment = new NovelCardListFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
+    public static NovelCardListFragment newInstance() {
+        return new NovelCardListFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         orientation = getResources().getConfiguration().orientation;
-
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-        }
     }
 
     @Override
@@ -63,6 +55,18 @@ public class NovelCardListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_novel_material_card_list, container, false);
 
+        setUpDrawer(view);
+        setUpCardList(view);
+
+        return view;
+    }
+
+    private void setUpDrawer(View view) {
+        filterDrawerLayout = (DrawerLayout) view.findViewById(R.id.filter_drawer_layout);
+
+    }
+
+    private void setUpCardList(View view) {
         MaterialListView materialListView = (MaterialListView) view.findViewById(R.id.material_novel_list_view);
         List<Card> cards = new ArrayList<>();
         for (int i = 0; i < DummyContent.ITEMS.size(); i++) {
@@ -97,9 +101,6 @@ public class NovelCardListFragment extends Fragment {
                     .build());
         }
         materialListView.getAdapter().addAll(cards);
-
-
-        return view;
     }
 
 
@@ -109,20 +110,6 @@ public class NovelCardListFragment extends Fragment {
         mListener = null;
     }
 
-    public static Fragment newInstance() {
-        return newInstance(mColumnCount);
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
         void onListFragmentInteraction(DummyItem item);
