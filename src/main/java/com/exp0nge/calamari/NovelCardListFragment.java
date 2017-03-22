@@ -26,9 +26,7 @@ import java.util.List;
  */
 public class NovelCardListFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private static int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
     private int orientation;
@@ -65,7 +63,7 @@ public class NovelCardListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_novel_material_card_list, container, false);
 
-        MaterialListView materialListView = (MaterialListView) view.findViewById(R.id.material_listview);
+        MaterialListView materialListView = (MaterialListView) view.findViewById(R.id.material_novel_list_view);
         List<Card> cards = new ArrayList<>();
         for (int i = 0; i < DummyContent.ITEMS.size(); i++) {
             cards.add(new Card.Builder(getContext())

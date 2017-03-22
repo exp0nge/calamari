@@ -6,7 +6,7 @@
     tools:context="com.exp0nge.calamari.NovelCardListFragment">
 
     <com.dexafree.materialList.view.MaterialListView
-        android:id="@+id/material_listview"
+        android:id="@+id/material_novel_list_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
 

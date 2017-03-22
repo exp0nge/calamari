@@ -1,4 +1,4 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -230,7 +230,6 @@
             android:id="@+id/tag_cloud_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="60dp"
             android:orientation="vertical">
 
             <com.dexafree.materialList.card.CardLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -277,4 +276,4 @@
             </com.dexafree.materialList.card.CardLayout>
         </LinearLayout>
     </LinearLayout>
-</ScrollView>
+</android.support.v4.widget.NestedScrollView>

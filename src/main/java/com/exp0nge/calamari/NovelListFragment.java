@@ -73,7 +73,6 @@ public class NovelListFragment extends Fragment {
         for (int i = 0; i < 3; i++) {
             cards.add(new Card.Builder(getContext())
                     .setTag("LIST_CARD")
-                    .setDismissible()
                     .withProvider(new ListCardProvider())
                     .setLayout(R.layout.material_list_card_layout)
                     .setTitle(Calendar.getInstance().getTime().toString())
