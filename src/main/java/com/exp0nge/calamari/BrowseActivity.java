@@ -32,6 +32,7 @@ public class BrowseActivity extends AppCompatActivity implements
         NovelListFragment.OnListFragmentInteractionListener,
         NovelDetailTabFragment.OnNovelDetailFragmentInteractionListener {
 
+    private static final String NOVEL_DETAIL_TAG = "novel_detail_fragment";
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -165,13 +166,12 @@ public class BrowseActivity extends AppCompatActivity implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
+        if (getFragmentManager().findFragmentByTag(NOVEL_DETAIL_TAG) != null) {
+            getFragmentManager().popBackStack();
+            return true;
+        }
         //noinspection SimplifiableIfStatement
-        switch (id) {
+        switch (item.getItemId()) {
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
@@ -190,9 +190,8 @@ public class BrowseActivity extends AppCompatActivity implements
     public void startNovelScrollFragment() {
         NovelScrollingFragment detailFragment = new NovelScrollingFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.main_browse_content, detailFragment);
-        transaction.addToBackStack(null);
-
+        transaction.replace(R.id.main_browse_content, detailFragment, NOVEL_DETAIL_TAG);
+        transaction.addToBackStack(NOVEL_DETAIL_TAG);
         transaction.commit();
     }
 

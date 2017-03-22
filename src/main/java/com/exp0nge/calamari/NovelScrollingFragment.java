@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,19 @@ public class NovelScrollingFragment extends Fragment implements
         }
 
         return false;
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        final NovelScrollingFragment that = this;
+        super.onPrepareOptionsMenu(menu);
+        menu.findItem(android.R.id.home).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                getActivity().getSupportFragmentManager().beginTransaction().remove(that).commit();
+                return true;
+            }
+        });
     }
 
     @Nullable
