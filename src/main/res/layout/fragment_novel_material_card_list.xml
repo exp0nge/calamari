@@ -1,28 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/filter_drawer_layout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/filter_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.exp0nge.calamari.NovelCardListFragment">
 
-    <RelativeLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
+
 
         <com.dexafree.materialList.view.MaterialListView
             android:id="@+id/material_novel_list_view"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent" />
-    </RelativeLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/filter_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@drawable/ic_filter_list" />
+
+    </android.support.design.widget.CoordinatorLayout>
 
     <LinearLayout
         android:id="@+id/filter_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_gravity="end">
+        android:layout_gravity="end"
+        android:background="?colorPrimary"
+        android:orientation="vertical">
 
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/large_text" />
+
+
+        </android.support.v4.widget.NestedScrollView>
 
     </LinearLayout>
 

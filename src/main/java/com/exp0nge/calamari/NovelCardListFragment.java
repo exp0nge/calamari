@@ -1,9 +1,11 @@
 package com.exp0nge.calamari;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +65,14 @@ public class NovelCardListFragment extends Fragment {
 
     private void setUpDrawer(View view) {
         filterDrawerLayout = (DrawerLayout) view.findViewById(R.id.filter_drawer_layout);
-
+        FloatingActionButton filterFloatingActionButton = (FloatingActionButton) view.findViewById(R.id.filter_fab);
+        filterFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filterDrawerLayout.openDrawer(Gravity.END);
+                filterDrawerLayout.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+            }
+        });
     }
 
     private void setUpCardList(View view) {
