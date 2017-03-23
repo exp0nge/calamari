@@ -117,4 +117,9 @@
     <string name="show_more">Show more</string>
     <string name="show_less">Show less</string>
     <string name="filter_the_current_list">Filter the current list</string>
+    <string name="number_of_releases">Number of Releases</string>
+    <string name="release_frequency">Release Frequency</string>
+    <string name="max">MAX</string>
+    <string name="min">MIN</string>
+    <string name="number_of_rating">Rating</string>
 </resources>
