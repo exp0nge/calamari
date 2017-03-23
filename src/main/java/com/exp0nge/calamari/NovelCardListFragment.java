@@ -1,11 +1,8 @@
 package com.exp0nge.calamari;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.DrawerLayout;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,18 +26,11 @@ import java.util.List;
  */
 public class NovelCardListFragment extends Fragment {
 
-    private DrawerLayout filterDrawerLayout;
     private OnListFragmentInteractionListener mListener;
-    private int orientation;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public NovelCardListFragment() {
     }
 
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static NovelCardListFragment newInstance() {
         return new NovelCardListFragment();
@@ -49,7 +39,6 @@ public class NovelCardListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        orientation = getResources().getConfiguration().orientation;
     }
 
     @Override
@@ -57,22 +46,9 @@ public class NovelCardListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_novel_material_card_list, container, false);
 
-        setUpDrawer(view);
         setUpCardList(view);
 
         return view;
-    }
-
-    private void setUpDrawer(View view) {
-        filterDrawerLayout = (DrawerLayout) view.findViewById(R.id.filter_drawer_layout);
-        FloatingActionButton filterFloatingActionButton = (FloatingActionButton) view.findViewById(R.id.filter_fab);
-        filterFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                filterDrawerLayout.openDrawer(Gravity.END);
-                filterDrawerLayout.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
-            }
-        });
     }
 
     private void setUpCardList(View view) {

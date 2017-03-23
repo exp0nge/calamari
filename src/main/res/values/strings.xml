@@ -116,4 +116,5 @@
     <string name="novel_release_status">Status</string>
     <string name="show_more">Show more</string>
     <string name="show_less">Show less</string>
+    <string name="filter_the_current_list">Filter the current list</string>
 </resources>
