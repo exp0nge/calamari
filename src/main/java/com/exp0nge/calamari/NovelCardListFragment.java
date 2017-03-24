@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.dexafree.materialList.card.Card;
 import com.dexafree.materialList.card.CardProvider;
@@ -47,8 +48,20 @@ public class NovelCardListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_novel_material_card_list, container, false);
 
         setUpCardList(view);
+        setUpFilterButton(view);
 
         return view;
+    }
+
+    private void setUpFilterButton(View view) {
+        ImageButton filterButton = (ImageButton) view.findViewById(R.id.filter_button);
+        filterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FilterDialogFragment filterDialogFragment = new FilterDialogFragment();
+                filterDialogFragment.show(getFragmentManager(), "filter_dialog");
+            }
+        });
     }
 
     private void setUpCardList(View view) {

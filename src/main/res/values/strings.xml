@@ -121,5 +121,10 @@
     <string name="release_frequency">Release Frequency</string>
     <string name="max">MAX</string>
     <string name="min">MIN</string>
-    <string name="number_of_rating">Rating</string>
+    <string name="rating_filter">Rating</string>
+    <string name="apply">Apply</string>
+    <string name="cancel">Cancel</string>
+    <string name="number_of_rating">Number of Ratings</string>
+    <string name="readers_filter">Readers</string>
+    <string name="last_release_date">Last Release Date</string>
 </resources>
