@@ -10,11 +10,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -36,31 +33,6 @@ public class NovelScrollingFragment extends Fragment implements
         super.onCreate(savedInstanceState);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == android.R.id.home) {
-            getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-            return true;
-        }
-
-        return false;
-    }
-
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        final NovelScrollingFragment that = this;
-        super.onPrepareOptionsMenu(menu);
-        menu.findItem(android.R.id.home).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                getActivity().getSupportFragmentManager().beginTransaction().remove(that).commit();
-                return true;
-            }
-        });
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -73,10 +45,7 @@ public class NovelScrollingFragment extends Fragment implements
 
         View view = getView();
 
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.novel_detail_toolbar);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Toolbar toolbar = (Toolbar) getView().findViewById(R.id.novel_detail_toolbar);
         toolbar.setTitle("A Really Long Novel Title Would Show Up Like This");
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.novel_detail_fab);
